@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3068629511232787987}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2926217764126921802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4046089430196972067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Axe_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633363182510896380}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DownArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4268926833988026271}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DownArm.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5961145692694355986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DownArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943829678762221489}
   - component: {fileID: 2843484600670594721}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2897228173661277957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DownArm.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4350500093877180420}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6065459053718586580}
-  m_Layer: 0
+  - component: {fileID: 4421373061173109523}
+  - component: {fileID: 4421373061173109522}
+  m_Layer: 9
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,6 +386,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4421373061173109523
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874470447499615854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 980d063bbff924445882e413c3438255, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4421373061173109522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874470447499615854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e94ab240deed44b3b56a83769d359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeWeaponName: Axe
+  isHand: 0
+  isAxe: 1
+  isPickaxe: 0
+  range: 3
+  damage: 1
+  workSpeed: 0
+  attackDelay: 1.7
+  attackDelayA: 0.5
+  attackDelayB: 0.1
+  workDelay: 1.3
+  workDelayA: 0.5
+  workDelayB: 0.1
+  anim: {fileID: 4421373061173109523}
 --- !u!1 &7469652134536437049
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8944838539020592169}
   - component: {fileID: 2031554417106369335}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3896518860293750753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}

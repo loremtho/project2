@@ -16,6 +16,12 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected RaycastHit hitlnfo;
 
+    private PlayerController thePlayerController;
+
+    void Start() {
+        thePlayerController = FindObjectOfType<PlayerController>();
+    }
+
 
 
 
@@ -26,28 +32,37 @@ public abstract class CloseWeaponController : MonoBehaviour
         {
             if (!isAttack)
             {
+                if(CheckObject())
+                {
+                    if(currentCloseWeapon.isAxe && hitlnfo.transform.tag == "Tree")
+                    {
+                        StartCoroutine(thePlayerController.TreeLookCoroutine(hitlnfo.transform.GetComponent<Tree>().GetTreeCenterPosition()));
+                        StartCoroutine(AttackCoroutine("Chop", currentCloseWeapon.workDelayA, currentCloseWeapon.workDelayB, currentCloseWeapon.workDelay));
+                        return;
+                    }
+                }
                 //코루틴
-                StartCoroutine(AttackCoroutine());
+                StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackDelayA, currentCloseWeapon.attackDelayB, currentCloseWeapon.attackDelay));
             }
         }
     }
 
-    protected IEnumerator AttackCoroutine()
+    protected IEnumerator AttackCoroutine(string swingType, float _delayA, float _delayB, float _delayC)
     {
 
         isAttack = true;
-        currentCloseWeapon.anim.SetTrigger("Attack");
+        currentCloseWeapon.anim.SetTrigger(swingType);
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackDelatA);
+        yield return new WaitForSeconds(_delayA);
         isSwing = true;  //공격 활성화
 
         StartCoroutine(HitCoroutine());
 
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackDelatB);
+        yield return new WaitForSeconds(_delayB);
         isSwing = false;
 
-        yield return new WaitForSeconds(currentCloseWeapon.attackDelay - currentCloseWeapon.attackDelatA - currentCloseWeapon.attackDelatB);
+        yield return new WaitForSeconds(_delayC - _delayA - _delayB);
         isAttack = false;
     }
 
@@ -70,16 +85,12 @@ public abstract class CloseWeaponController : MonoBehaviour
         if (WeaponManager.currentWeapon != null)
             WeaponManager.currentWeapon.gameObject.SetActive(false);
         
-
         currentCloseWeapon = _closeWeapon;
         WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
         WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
 
-
-
         currentCloseWeapon.transform.localPosition = Vector3.zero;
         currentCloseWeapon.gameObject.SetActive(true);
-       
     }
 
 }

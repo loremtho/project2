@@ -27,6 +27,22 @@ public class AxeController : CloseWeaponController
         {
             if(CheckObject())
             {
+                if(hitlnfo.transform.tag == "Rock")
+                {
+                    hitlnfo.transform.GetComponent<Rock>().Mining();                   
+                }
+                else if(hitlnfo.transform.tag == "Twig")
+                {
+                    hitlnfo.transform.GetComponent<Twig>().Damage(this.transform);                   
+                }
+                else if(hitlnfo.transform.tag == "Grass")
+                {
+                    hitlnfo.transform.GetComponent<Grass>().Damage();                   
+                }
+                else if(hitlnfo.transform.tag == "Tree")
+                {
+                    hitlnfo.transform.GetComponent<Tree>().Chop(hitlnfo.point, transform.eulerAngles.y);                   
+                }
                 isSwing= false;
                 Debug.Log(hitlnfo.transform.name);
             }
@@ -38,6 +54,5 @@ public class AxeController : CloseWeaponController
     {
         base.CloseWeaponChange(_closeWeapon);
         isActivate= true;
-
     }
 }
