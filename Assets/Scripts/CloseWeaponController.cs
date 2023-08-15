@@ -36,7 +36,7 @@ public abstract class CloseWeaponController : MonoBehaviour
                 {
                     if(currentCloseWeapon.isAxe && hitlnfo.transform.tag == "Tree")
                     {
-                        StartCoroutine(thePlayerController.TreeLookCoroutine(hitlnfo.transform.GetComponent<Tree>().GetTreeCenterPosition()));
+                        //StartCoroutine(thePlayerController.TreeLookCoroutine(hitlnfo.transform.GetComponent<Tree>().GetTreeCenterPosition()));
                         StartCoroutine(AttackCoroutine("Chop", currentCloseWeapon.workDelayA, currentCloseWeapon.workDelayB, currentCloseWeapon.workDelay));
                         return;
                     }

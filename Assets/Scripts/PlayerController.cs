@@ -216,7 +216,15 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation() //카메라 시점 설정
     {
-        if(!pauseCameraRotation)
+        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _cameraRotationX = _xRotation * lookSensitivity;
+
+        currentCameraRotationX -= _cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+
+        theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+
+        /*if(!pauseCameraRotation)
         {
             float _xRotation = Input.GetAxisRaw("Mouse Y");
             float _cameraRotationX = _xRotation * lookSensitivity;
@@ -225,12 +233,12 @@ public class PlayerController : MonoBehaviour
             currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
             theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-        }
+        }*/
     }
 
-    private bool pauseCameraRotation = false;
+    //private bool pauseCameraRotation = false;
 
-    public IEnumerator TreeLookCoroutine(Vector3 _target)
+    /*public IEnumerator TreeLookCoroutine(Vector3 _target)
     {
         pauseCameraRotation = true;
 
@@ -248,6 +256,7 @@ public class PlayerController : MonoBehaviour
 
         pauseCameraRotation = false;
     }
+    */
 
   
 }
