@@ -7,13 +7,14 @@ public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false;
 
-    [SerializeField] //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
+    [SerializeField] 
     private GameObject go_InventoryBase;
 
     [SerializeField]
     private GameObject go_SlotsParent;
 
-    private Slot[] slots; //½½·Ôµé
+    private Slot[] slots; //ìŠ¬ë¡¯
 
     
     // Start is called before the first frame update
@@ -66,7 +67,7 @@ public class Inventory : MonoBehaviour
                 {
                     if (slots[i].item.itemName == _item.itemName)
                     {
-                        slots[i].SetSlotCoint(_count);
+                        slots[i].SetSlotCount(_count);
                         return;
                     }
                 }

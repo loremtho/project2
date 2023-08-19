@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    // Start is called before the first frame update
-    public Item item; //Å‰µæÇÑ ¾ÆÀÌÅÛ
-    public int itemCount; //Å‰µæÇÑ ¾ÆÀÌÅÛ °³¼ö
-    public Image itemImage; // ¾ÆÀÌÅÛÀÇ ÀÌ¹ÌÁö
+
+    public Item item; //íšë“í•œ ì•„ì´í…œ   
+    public int itemCount; //íšë“í•œ ì•„ì´í…œì˜ ê°œìˆ˜
+    public Image itemImage; // ì•„ì´í…œ ì´ë¯¸ì§€
 
     [SerializeField]
     private Text text_Count;
     [SerializeField]
     private GameObject go_CountImage;
 
-    private void SetColor(float _alpha)  //ÀÌ¹ÌÁö Åõ¸íµµ Á¶Àı
+    private WeaponManager theWeaponManager;
+    private Rect baseRect;
+    private InputNumber theInputNumber;
+
+
+    void Start() 
+    {
+        baseRect = transform.parent.parent.GetComponent<RectTransform>().rect;
+        theWeaponManager = FindObjectOfType<WeaponManager>();
+        theInputNumber = FindObjectOfType<InputNumber>();
+    }
+
+    private void SetColor(float _alpha)  //ì´ë¯¸ì§€ íˆ¬ëª…ë„ ì¡°ì ˆ
     {
         Color color = itemImage.color;
         color.a = _alpha;
@@ -24,7 +38,7 @@ public class Slot : MonoBehaviour
     }
 
 
-    public void AddItem(Item _item, int _count = 1) //¾ÆÀÌÅÛ Å‰µæ
+    public void AddItem(Item _item, int _count = 1) //ì•„ì´í…œ íšë“
     {
         item = _item;
         itemCount= _count;
@@ -44,7 +58,7 @@ public class Slot : MonoBehaviour
         SetColor(1);
     }
 
-    public void SetSlotCoint(int _count) //¾ÆÀÌÅÛ °³¼ö Á¶Á¤
+    public void SetSlotCount(int _count) //ì•„ì´í…œ ê°¯ìˆ˜ ì¡°ì •
     {
         itemCount= _count;
         text_Count.text = itemCount.ToString();
@@ -57,7 +71,7 @@ public class Slot : MonoBehaviour
     }
 
 
-    private void ClearSlot() //½½·Ô ÃÊ±âÈ­
+    private void ClearSlot() //ìŠ¬ë¡¯ ì´ˆê¸°í™”
     {
         item = null;
         itemCount = 0;
@@ -67,5 +81,82 @@ public class Slot : MonoBehaviour
        
         text_Count.text = "0";
         go_CountImage.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            if(item != null)
+            {
+                if(item.itemType == Item.ItemType.Equipment)
+                {
+                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
+                }
+                else
+                {
+                    Debug.Log(item.itemName + "ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤");
+                    SetSlotCount(-1);
+                }
+            }
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if(item != null)
+        {
+            DragSlot.instance.dragSlot = this;
+            DragSlot.instance.DragSetImage(itemImage);
+            DragSlot.instance.transform.position = eventData.position;
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if(item != null)
+        {
+            DragSlot.instance.transform.position = eventData.position;
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if(DragSlot.instance.transform.localPosition.x < baseRect.xMin || DragSlot.instance.transform.localPosition.x > baseRect.xMax ||
+           DragSlot.instance.transform.localPosition.y < baseRect.yMin || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
+        {
+            if(DragSlot.instance.dragSlot != null)
+            {
+               theInputNumber.Call();
+            }
+        }
+        else
+        {
+            DragSlot.instance.SetColor(0);
+            DragSlot.instance.dragSlot = null;
+        }
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if(DragSlot.instance.dragSlot != null)
+           ChangeSlot();
+    }
+
+    private void ChangeSlot()
+    {
+        Item _tempItem = item;
+        int _tempItemCount = itemCount;
+
+        AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+
+        if(_tempItem != null)
+        {
+            DragSlot.instance.dragSlot.AddItem(_tempItem, _tempItemCount);
+        }
+        else
+        {
+            DragSlot.instance.dragSlot.ClearSlot();
+        }
     }
 }
