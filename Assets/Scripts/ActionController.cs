@@ -71,7 +71,7 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " ?? " + "<color=yellow>" + "(E)" + "</color>";
+        actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + "Å‰µæ" + "<color=yellow>" + "(E)" + "</color>";
     }
 
     private void lnfoDisappear()

@@ -75,12 +75,16 @@ public class InputNumber : MonoBehaviour
     {
         for (int i = 0; i < _num; i++)
         {
-            Instantiate(DragSlot.instance.dragSlot.item.itemPrefad, thePlayer.transform.position + thePlayer.transform.forward, Quaternion.identity);
+            if(DragSlot.instance.dragSlot.item.itemPrefad != null)
+            {
+                Instantiate(DragSlot.instance.dragSlot.item.itemPrefad, thePlayer.transform.position + thePlayer.transform.forward, Quaternion.identity);
+            }
             DragSlot.instance.dragSlot.SetSlotCount(-1);
             yield return new WaitForSeconds(0.05f);
         }
         DragSlot.instance.dragSlot = null;
         go_Base.SetActive(false);
+        activated = false;
     }
 
     private bool CheckNumber(string _argString)

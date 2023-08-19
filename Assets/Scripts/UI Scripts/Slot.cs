@@ -17,15 +17,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     [SerializeField]
     private GameObject go_CountImage;
 
-    private WeaponManager theWeaponManager;
+    private ItemEffectDatabase theItemEffectDarabase;
     private Rect baseRect;
     private InputNumber theInputNumber;
 
 
     void Start() 
     {
+        theItemEffectDarabase = FindObjectOfType<ItemEffectDatabase>();
         baseRect = transform.parent.parent.GetComponent<RectTransform>().rect;
-        theWeaponManager = FindObjectOfType<WeaponManager>();
         theInputNumber = FindObjectOfType<InputNumber>();
     }
 
@@ -89,15 +89,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             if(item != null)
             {
-                if(item.itemType == Item.ItemType.Equipment)
+              
+                theItemEffectDarabase.UseItem(item);
+
+                if(item.itemType == Item.ItemType.Used)
                 {
-                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-                }
-                else
-                {
-                    Debug.Log(item.itemName + "을 사용했습니다");
                     SetSlotCount(-1);
                 }
+       
             }
         }
     }
