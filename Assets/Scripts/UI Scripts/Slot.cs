@@ -112,7 +112,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             DragSlot.instance.dragSlot = this;
             DragSlot.instance.DragSetImage(itemImage);
-            DragSlot.instance.transform.position = eventData.position;
+            DragSlot.instance.transform.position = eventData.position; //??
         }
     }
 
