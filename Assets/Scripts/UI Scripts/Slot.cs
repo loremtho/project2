@@ -12,6 +12,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public int itemCount; //획득한 아이템의 개수
     public Image itemImage; // 아이템 이미지
 
+    [SerializeField] private bool isQuickSlot; //퀵슬롯 여부 판단
+    [SerializeField] private int quickSlotNumber; // 퀵슬롯 번호
+
     [SerializeField]
     private Text text_Count;
     [SerializeField]
@@ -63,6 +66,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         SetColor(1);
     }
 
+    public int GetQuickSlotNumber()
+    {
+        return quickSlotNumber;
+    }
+
     public void SetSlotCount(int _count) //아이템 갯수 조정
     {
         itemCount= _count;
@@ -108,7 +116,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(item != null)
+        if(item != null && Inventory.inventoryActivated)
         {
             DragSlot.instance.dragSlot = this;
             DragSlot.instance.DragSetImage(itemImage);
@@ -148,7 +156,16 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public void OnDrop(PointerEventData eventData)
     {
         if(DragSlot.instance.dragSlot != null)
-           ChangeSlot();
+        {
+            ChangeSlot();
+
+            if(isQuickSlot) // 인벤토리에서 퀵슬롯으로 (혹은 퀵슬롯에서 퀵슬롯으로)
+                theItemEffectDarabase.IsActivatedQuickSlot(quickSlotNumber); // 활성화된 퀵슬롯인지 판단 / 판단 후 교체
+            else //인벤토리 -> 인벤토리, 퀵슬롯 -> 퀵슬롯
+                if(DragSlot.instance.dragSlot.isQuickSlot) //퀵슬롯 -> 인벤토리
+                    theItemEffectDarabase.IsActivatedQuickSlot(DragSlot.instance.dragSlot.quickSlotNumber); //활성화된 퀵슬롯 ? 교체작업
+        }
+           
     }
 
     private void ChangeSlot()

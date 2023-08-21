@@ -11,7 +11,7 @@ public class Item : ScriptableObject
     public string itemDesc; //아이템 설명
     public ItemType itemType; //아이템의 유형
     public Sprite itemImage; //아이템 이미지
-    public GameObject itemPrefad; //아이템의 프리펩
+    public GameObject itemPrefab; //아이템의 프리펩
 
     public string weaponType; //무기 유형.
 

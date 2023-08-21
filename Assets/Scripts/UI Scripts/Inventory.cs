@@ -14,13 +14,19 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject go_SlotsParent;
 
-    private Slot[] slots; //슬롯
+    [SerializeField]
+    private GameObject go_QuickSlotParent;
+
+    private Slot[] slots; //인벤토리 슬롯들.
+    private Slot[] quickslots; // 퀵슬롯들
+    private bool isNotPut;
 
     
     // Start is called before the first frame update
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+        quickslots = go_QuickSlotParent.GetComponentsInChildren<Slot>();
     }
 
     // Update is called once per frame
@@ -59,31 +65,45 @@ public class Inventory : MonoBehaviour
 
     public void Acquireltem(Item _item, int _count = 1)
     {
+        PutSlot(quickslots, _item, _count);
+        if(isNotPut == true)
+        {
+            PutSlot(slots, _item, _count);  
+        }
+        if(isNotPut)
+        Debug.Log("퀵슬롯과 인벤토리가 꽉찼습니다");
+    }
+
+    private void PutSlot(Slot[] _slots, Item _item, int _count)
+    {
         if(Item.ItemType.Equipment != _item.itemType)
         {
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = 0; i < _slots.Length; i++)
             {
-                if (slots[i].item != null)
+                if (_slots[i].item != null)
                 {
-                    if (slots[i].item.itemName == _item.itemName)
+                    if (_slots[i].item.itemName == _item.itemName)
                     {
-                        slots[i].SetSlotCount(_count);
+                        _slots[i].SetSlotCount(_count);
+                        isNotPut = false;
                         return;
                     }
                 }
             }
         }
-    
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
-            if (slots[i].item == null )
+            if (_slots[i].item == null )
             {
-                slots[i].AddItem(_item, _count);
+                _slots[i].AddItem(_item, _count);
+                isNotPut = false;
                 return;
             }
 
         }
+
+        isNotPut = true;
     }
 
 }
