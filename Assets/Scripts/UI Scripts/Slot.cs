@@ -107,7 +107,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             DragSlot.instance.dragSlot = this;
             DragSlot.instance.DragSetImage(itemImage);
-            DragSlot.instance.transform.position = eventData.position; //??
+            DragSlot.instance.transform.position = eventData.position;
         }
     }
 
