@@ -60,7 +60,7 @@ public class ActionController : MonoBehaviour
         {
             if(hitinfo.transform != null)
             {
-                Debug.Log(hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " Å‰µæ ");
+                Debug.Log(hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + " ?????? ");
                 theinventory.Acquireltem(hitinfo.transform.GetComponent<ItemPickUp>().item );
                 Destroy(hitinfo.transform.gameObject);
                 lnfoDisappear();

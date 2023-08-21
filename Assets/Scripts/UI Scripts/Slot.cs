@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
 
     public Item item; //획득한 아이템   
@@ -18,19 +18,14 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private GameObject go_CountImage;
 
     private ItemEffectDatabase theItemEffectDarabase;
-
-    [SerializeField]
-    private RectTransform baseRect; //인벤토리 영역
-    [SerializeField]
-    private RectTransform quickSlotBaseRect; //퀵슬롯의 영역.
-
+    private Rect baseRect;
     private InputNumber theInputNumber;
-    
 
 
     void Start() 
     {
         theItemEffectDarabase = FindObjectOfType<ItemEffectDatabase>();
+        baseRect = transform.parent.parent.GetComponent<RectTransform>().rect;
         theInputNumber = FindObjectOfType<InputNumber>();
     }
 
@@ -126,16 +121,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
-        if(!((DragSlot.instance.transform.localPosition.x > baseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < baseRect.rect.xMax 
-            && DragSlot.instance.transform.localPosition.y > baseRect.rect.yMin && DragSlot.instance.transform.localPosition.y < baseRect.rect.yMax)
-           ||
-           (DragSlot.instance.transform.localPosition.x >quickSlotBaseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < quickSlotBaseRect.rect.xMax 
-           && DragSlot.instance.transform.localPosition.y > quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMax && DragSlot.instance.transform.localPosition.y < quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMin)))
+        if(DragSlot.instance.transform.localPosition.x < baseRect.xMin || DragSlot.instance.transform.localPosition.x > baseRect.xMax ||
+           DragSlot.instance.transform.localPosition.y < baseRect.yMin || DragSlot.instance.transform.localPosition.y > baseRect.yMax)
         {
             if(DragSlot.instance.dragSlot != null)
             {
-                theInputNumber.Call();
+               theInputNumber.Call();
             }
         }
         else
@@ -166,21 +157,5 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             DragSlot.instance.dragSlot.ClearSlot();
         }
-    }
-
-    //마우스가 슬롯에 들어갈떄 발동
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if(item != null)
-        {
-            theItemEffectDarabase.ShowToolTip(item, transform.position);
-        }
-      
-    }
-
-    //슬롯에서 빠저나갈떄 발동
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        theItemEffectDarabase.HideToolTip();
     }
 }
