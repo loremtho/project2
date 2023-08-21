@@ -62,20 +62,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isChangeWepon)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                StartCoroutine(ChangeWeaponCoroutine("HAND", "¸Ç¼Õ"));
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-                StartCoroutine(ChangeWeaponCoroutine("GUN", "SubMachineGun1"));
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-                StartCoroutine(ChangeWeaponCoroutine("AXE", "Axe"));
-        }
 
-    }
 
     public IEnumerator ChangeWeaponCoroutine(string _type, string _name)
     {
