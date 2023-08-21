@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //½ºÇÇµå Á¶Á¤
+    //ìŠ¤í”¼ë“œ ì¡°ì •
     [SerializeField]    
     private float walkSpeed;
     [SerializeField]
@@ -16,19 +16,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
-    //»óÅÂ º¯¼ö
+    //ìƒíƒœ ë³€ìˆ˜
     private bool isWalk = false;
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
    
 
-    //¿òÁ÷ÀÓ Ã¼Å© º¯¼ö
+    //ì›€ì§ì„ ì²´í¬ ë³€ìˆ˜
     private Vector3 lastPos;
 
 
 
-    //¾É¾ÒÀ»¶§ ¾ó¸¶³ª ¾ÉÀ»Áö
+    //ì•‰ì•˜ì„ë•Œ ì–¼ë§ˆë‚˜ ì•‰ì„ì§€
 
     [SerializeField]
     private float crouchPosY;
@@ -37,16 +37,16 @@ public class PlayerController : MonoBehaviour
 
     private CapsuleCollider capsuleCollider;
 
-    //¹Î°¨µµ
+    //ë¯¼ê°ë„
     [SerializeField]
     private float lookSensitivity;
 
-    //Ä«¸Ş¶ó ¾È°è
+    //ì¹´ë©”ë¼ ì•ˆê³„
     [SerializeField]
     private float cameraRotationLimit;
     private float currentCameraRotationX = 0;
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private Camera theCamera;
     private Rigidbody myRigid;
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         theCrosshair = FindObjectOfType<Crosshair>();
         theStatusController = FindObjectOfType<StatusController>();
 
-        //ÃÊ±âÈ­
+        //ì´ˆê¸°í™”
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         MoveCheck();
     }
     
-    private void TryCrrouch() //¾É´Â ½Ãµµ
+    private void TryCrrouch() //ì•‰ëŠ” ì‹œë„
     {
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Crouch()  //¾É±â µ¿ÀÛ
+    private void Crouch()  //ì•‰ê¸° ë™ì‘
     {
         isCrouch = !isCrouch;
         theCrosshair.CrouchingAnimation(isCrouch);
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    IEnumerator CrouchCoroutine()  //ÀÚ¿¬½º·´°Ô ¾É±â
+    IEnumerator CrouchCoroutine()  //ìì—°ìŠ¤ëŸ½ê²Œ ì•‰ê¸°
     {
         float _posY = theCamera.transform.localPosition.y;
         int count = 0;
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
      
     }
 
-    private void TryRun() //´Ş¸®±â ½Ãµµ
+    private void TryRun() //ë‹¬ë¦¬ê¸° ì‹œë„
     {
         if(Input.GetKey(KeyCode.LeftShift) && theStatusController.GetCurrentSP() > 0)
         {
@@ -142,12 +142,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void IsGround() //Á¡ÇÁÀü ¹Ù´Ú Ã¼Å©
+    private void IsGround() //ì í”„ì „ ë°”ë‹¥ ì²´í¬
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
         theCrosshair.JumpingAnimation(!isGround);
     }
-    private void TryJump() //Á¡ÇÁ ½Ãµµ
+    private void TryJump() //ì í”„ ì‹œë„
     {
         if(Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0 )
         {
@@ -155,9 +155,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump() //Á¡ÇÁ
+    private void Jump() //ì í”„
     {
-        if (isCrouch) //¾ÊÀº »óÅÂ¿¡¼­ Á¡ÇÁ·Î ÇØÁ¦
+        if (isCrouch) //ì•Šì€ ìƒíƒœì—ì„œ ì í”„ë¡œ í•´ì œ
             Crouch();
         theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
     private void Running()
     {
-        if (isCrouch) //¾ÊÀº »óÅÂ¿¡¼­ ´Ş¸®±â·Î ÇØÁ¦
+        if (isCrouch) //ì•Šì€ ìƒíƒœì—ì„œ ë‹¬ë¦¬ê¸°ë¡œ í•´ì œ
             Crouch();
 
         theGunController.CancelFinSight();
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
         applySpeed = runSpeed;
     }
 
-    //´Ş¸®±â Ãë¼Ò
+    //ë‹¬ë¦¬ê¸° ì·¨ì†Œ
     private void RunningCancel()
     {
         isRun = false;
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
     }
 
-    private void Move() //ÇÃ·¹ÀÌ¾î ÀÌµ¿
+    private void Move() //í”Œë ˆì´ì–´ ì´ë™
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    private void CharacterRotation() //ÁÂ¿ì Ä³¸¯ÅÍ È¸Àü
+    private void CharacterRotation() //ì¢Œìš° ìºë¦­í„° íšŒì „
     {
         float _yRotation = Input.GetAxis("Mouse X");
         Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void CameraRotation() //Ä«¸Ş¶ó ½ÃÁ¡ ¼³Á¤
+    private void CameraRotation() //ì¹´ë©”ë¼ ì‹œì  ì„¤ì •
     {
         float _xRotation = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRotation * lookSensitivity;

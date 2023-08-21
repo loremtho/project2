@@ -5,24 +5,24 @@ using UnityEngine;
 public class CloseWeapon : MonoBehaviour
 {
     // Start is called before the first frame update
-    public string closeWeaponName;  //±ÙÁ¢¹«±â.
+    public string closeWeaponName;  //ê·¼ì ‘ë¬´ê¸°.
 
     public bool isHand;
     public bool isAxe;
     public bool isPickaxe;
 
-    public float range; //°ø°İ ¹üÀ§
-    public int damage; //°ø°İ·Â.
-    public float workSpeed; // ÀÛ¾÷¼Óµµ.
-    public float attackDelay; //°ø°İ µô·¹ÀÌ
-    public float attackDelayA; //°ø°İ È°¼ºÈ­ ½ÃÁ¡.
-    public float attackDelayB; //°ø°İ ºñÈ°¼ºÈ­ ½ÃÁ¡.
+    public float range; //ê³µê²© ë²”ìœ„
+    public int damage; //ê³µê²©ë ¥.
+    public float workSpeed; // ì‘ì—…ì†ë„.
+    public float attackDelay; //ê³µê²© ë”œë ˆì´
+    public float attackDelayA; //ê³µê²© í™œì„±í™” ì‹œì .
+    public float attackDelayB; //ê³µê²© ë¹„í™œì„±í™” ì‹œì .
 
-    public float workDelay; //ÀÛ¾÷ µô·¹ÀÌ
-    public float workDelayA; //ÀÛ¾÷ È°¼ºÈ­ ½ÃÁ¡.
-    public float workDelayB; //ÀÛ¾÷ ºñÈ°¼ºÈ­ ½ÃÁ¡.
+    public float workDelay; //ì‘ì—… ë”œë ˆì´
+    public float workDelayA; //ì‘ì—… í™œì„±í™” ì‹œì .
+    public float workDelayB; //ì‘ì—… ë¹„í™œì„±í™” ì‹œì .
 
-    public Animator anim; //¾Ö´Ï¸ŞÀÌ¼Ç
+    public Animator anim; //ì• ë‹ˆë©”ì´ì…˜
 
 
  

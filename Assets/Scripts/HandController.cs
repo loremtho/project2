@@ -5,7 +5,7 @@ using UnityEngine;
 public class HandController : CloseWeaponController
 {
 
-    //È°¼ºÈ­¿©ºÎ
+    //í™œì„±í™”ì—¬ë¶€
     public static bool isActivate = false;
     // Update is called once per frame
     void Update()

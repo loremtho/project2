@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
 {
-    //±âÁ¸À§Ä¡
+    //ê¸°ì¡´ìœ„ì¹˜
     private Vector3 originPos;
 
-    //ÇöÀçÀ§Ä¡
+    //í˜„ì¬ìœ„ì¹˜
     private Vector3 currentPos;
 
-    //sway ÇÑ°è
+    //sway í•œê³„
     [SerializeField]
     private Vector3 limitPos;
 
-    //Á¤Á¶ÁØ sway ÇÑ°è
+    //ì •ì¡°ì¤€ sway í•œê³„
     [SerializeField]
     private Vector3 fineSightLimotPos;
 
-    //ºÎµå·¯¿î ¿òÁ÷ÀÓ Á¤µµ
+    //ë¶€ë“œëŸ¬ìš´ ì›€ì§ì„ ì •ë„
     [SerializeField]
     private Vector3 smoothSway;
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private GunController theGunController;
     // Start is called before the first frame update

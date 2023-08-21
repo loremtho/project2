@@ -6,10 +6,10 @@ using static UnityEditor.Progress;
 [System.Serializable]
 public class ItemEffect
 {
-    public string itemName; //¾ÆÀÌÅÛÀÇ ÀÌ¸§ (Å°°ª)
-    [Tooltip("HP, SP,  DP, HUNGRY, THIRSTY, SATISFY ¸¸ °¡´ÉÇÕ´Ï´Ù.")]
-    public string[] part; //ºÎÀ§
-    public int[] num; //¼öÄ¡
+    public string itemName; //ì•„ì´í…œì˜ ì´ë¦„ (í‚¤ê°’)
+    [Tooltip("HP, SP,  DP, HUNGRY, THIRSTY, SATISFY ë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤.")]
+    public string[] part; //ë¶€ìœ„
+    public int[] num; //ìˆ˜ì¹˜
     
 }
 public class ItemEffectDatabase : MonoBehaviour
@@ -17,7 +17,7 @@ public class ItemEffectDatabase : MonoBehaviour
     [SerializeField]
     private ItemEffect[] itemEffects;
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private StatusController thePlayerStatus;
     [SerializeField]
@@ -72,18 +72,18 @@ public class ItemEffectDatabase : MonoBehaviour
                             case "SATISFY":
                                 break;
                             default:
-                                Debug.Log("Àß¸øµÈ Status ºÎÀ§.HP, SP,  DP, HUNGRY, THIRSTY, SATISFY ¸¸ °¡´ÉÇÕ´Ï´Ù. ");
+                                Debug.Log("ì˜ëª»ëœ Status ë¶€ìœ„.HP, SP,  DP, HUNGRY, THIRSTY, SATISFY ë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤. ");
                                 break;
 
                         }
-                        Debug.Log(_item.itemName + "À» »ç¿ëÇß½À´Ï´Ù.");
+                        Debug.Log(_item.itemName + "ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤.");
                   
                     }
                     return;
                 }
 
             }
-            Debug.Log("ItemEffectDatabase¿¡ ÀÏÄ¡ÇÏ´Â itemName ¾ø½À´Ï´Ù");
+            Debug.Log("ItemEffectDatabaseì— ì¼ì¹˜í•˜ëŠ” itemName ì—†ìŠµë‹ˆë‹¤");
         }
     }
   

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class QuickSlotController : MonoBehaviour
 {
-    [SerializeField] private Slot[] quickSlots; //Äü½½·Ôµé.
-    [SerializeField] private Transform tf_parent; //Äü½½·ÏÀÇ ºÎ¸ğ °´Ã¼.
+    [SerializeField] private Slot[] quickSlots; //í€µìŠ¬ë¡¯ë“¤.
+    [SerializeField] private Transform tf_parent; //í€µìŠ¬ë¡ì˜ ë¶€ëª¨ ê°ì²´.
 
-    private int selectedSlot; //¼±ÅÃµÈ Äü½½·Ï. (0~7) = 8°³.
+    private int selectedSlot; //ì„ íƒëœ í€µìŠ¬ë¡. (0~7) = 8ê°œ.
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
-    private GameObject go_SelectedImage; //¼±ÅÃµÈ Äü½½·ÔÀÇ ÀÌ¹ÌÁö.
+    private GameObject go_SelectedImage; //ì„ íƒëœ í€µìŠ¬ë¡¯ì˜ ì´ë¯¸ì§€.
     [SerializeField]
     private WeaponManager theWeaponManager;
 
@@ -61,7 +61,7 @@ public class QuickSlotController : MonoBehaviour
             if(DragSlot.instance.dragSlot!= null)
             {
                 /*
-                if (DragSlot.instance.dragSlot.GetQuickSlotNumber() == selectedSlot) //°­ÀÇ ´©¶ô?
+                if (DragSlot.instance.dragSlot.GetQuickSlotNumber() == selectedSlot) //ê°•ì˜ ëˆ„ë½?
                 {
                     Execute();
                     return;
@@ -83,10 +83,10 @@ public class QuickSlotController : MonoBehaviour
 
     private void SelectedSlot(int _num)
     {
-        //¼±ÅÃµÈ ½½·Ô
+        //ì„ íƒëœ ìŠ¬ë¡¯
         selectedSlot = _num;
 
-        //¼±ÅÃµÈ ½½·ÔÀ¸·Î ÀÌ¹ÌÁö ÀÌµ¿
+        //ì„ íƒëœ ìŠ¬ë¡¯ìœ¼ë¡œ ì´ë¯¸ì§€ ì´ë™
         go_SelectedImage.transform.position = quickSlots[selectedSlot].transform.position;
     }
     private void Execute()
@@ -99,16 +99,16 @@ public class QuickSlotController : MonoBehaviour
             }
             else if(quickSlots[selectedSlot].item.itemType == Item.ItemType.Used)
             {
-                StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "¸Ç¼Õ"));
+                StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "ë§¨ì†"));
             }
             else
             {
-                StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "¸Ç¼Õ"));
+                StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "ë§¨ì†"));
             }
         }
         else
         {
-            StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "¸Ç¼Õ"));
+            StartCoroutine(theWeaponManager.ChangeWeaponCoroutine("HAND", "ë§¨ì†"));
         }
     }
 }

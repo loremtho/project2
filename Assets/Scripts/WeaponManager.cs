@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    //¹«±â Áßº¹ ±³Ã¼ ½ÇÇà ¹æÁö °øÀ¯ÀÚ¿ø. Å¬·¡½º º¯¼ö = Á¤Àûº¯¼ö
+    //ë¬´ê¸° ì¤‘ë³µ êµì²´ ì‹¤í–‰ ë°©ì§€ ê³µìœ ìì›. í´ë˜ìŠ¤ ë³€ìˆ˜ = ì •ì ë³€ìˆ˜
     public static bool isChangeWepon = false;
 
-    //ÇöÀç¹«±â¿Í ¾Ö´Ï¸ŞÀÌ¼Ç
+    //í˜„ì¬ë¬´ê¸°ì™€ ì• ë‹ˆë©”ì´ì…˜
     public static Transform currentWeapon;
     public static Animator currentWeaponAnim;
 
-    //ÇöÀç ¹«±â Å¸ÀÔ
+    //í˜„ì¬ ë¬´ê¸° íƒ€ì…
     [SerializeField]
     private string currentWeaponType;
 
@@ -22,7 +22,7 @@ public class WeaponManager : MonoBehaviour
     private float changeWeaponEndDelayTime;
 
 
-    //¹«±âÁ¾·ù °ü¸®
+    //ë¬´ê¸°ì¢…ë¥˜ ê´€ë¦¬
     [SerializeField]
     private Gun[] guns;
     [SerializeField]
@@ -30,12 +30,12 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private CloseWeapon[] axes;
 
-    //°ü¸® Â÷¿ø¿¡¼­ ½±°Ô ¹«±â Á¢±ÙÀÌ °¡´ÉÇÏµµ·Ï ÇÔ
+    //ê´€ë¦¬ ì°¨ì›ì—ì„œ ì‰½ê²Œ ë¬´ê¸° ì ‘ê·¼ì´ ê°€ëŠ¥í•˜ë„ë¡ í•¨
     private Dictionary<string, Gun> gunDictionary = new Dictionary<string, Gun>();
     private Dictionary<string, CloseWeapon> handDictionary = new Dictionary<string, CloseWeapon>();
     private Dictionary<string, CloseWeapon> axeDictionary = new Dictionary<string, CloseWeapon>();
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private GunController theGunController;
     [SerializeField]

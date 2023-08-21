@@ -6,14 +6,14 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     // Start is called before the first frame update
-    public string itemName; //¾ÆÀÌÅÛ ÀÌ¸§
-    [TextArea] //´ÙÀ½ÁÙ ÀÌµ¿°¡´É ±â´É
-    public string itemDesc; //¾ÆÀÌÅÛ ¼³¸í
-    public ItemType itemType; //¾ÆÀÌÅÛÀÇ À¯Çü
-    public Sprite itemImage; //¾ÆÀÌÅÛ ÀÌ¹ÌÁö
-    public GameObject itemPrefad; //¾ÆÀÌÅÛÀÇ ÇÁ¸®Æé
+    public string itemName; //ì•„ì´í…œ ì´ë¦„
+    [TextArea] //ë‹¤ìŒì¤„ ì´ë™ê°€ëŠ¥ ê¸°ëŠ¥
+    public string itemDesc; //ì•„ì´í…œ ì„¤ëª…
+    public ItemType itemType; //ì•„ì´í…œì˜ ìœ í˜•
+    public Sprite itemImage; //ì•„ì´í…œ ì´ë¯¸ì§€
+    public GameObject itemPrefad; //ì•„ì´í…œì˜ í”„ë¦¬í©
 
-    public string weaponType; //¹«±â À¯Çü.
+    public string weaponType; //ë¬´ê¸° ìœ í˜•.
 
     public enum ItemType
     {

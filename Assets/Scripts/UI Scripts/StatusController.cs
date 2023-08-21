@@ -7,17 +7,17 @@ using UnityEngine.UI;
 public class StatusController : MonoBehaviour
 {
     // Start is called before the first frame update
-    //Ã¼·Â
+    //ì²´ë ¥
     [SerializeField]
     private int hp;
     private int currentHp;
 
-    //½ºÅ×¹Ì³ª
+    //ìŠ¤í…Œë¯¸ë‚˜
     [SerializeField]
     private int sp;
     private int currentSp;
 
-    //½ºÅ×¹Ì³ª Áõ°¡·®
+    //ìŠ¤í…Œë¯¸ë‚˜ ì¦ê°€ëŸ‰
     [SerializeField]
     private int spIncreaseSpeed;
 
@@ -25,40 +25,40 @@ public class StatusController : MonoBehaviour
     private int spRechargeTime;
     private int currentSpRechargeTime;
 
-    //½ºÅÂ¹Ì³ª °¨¼Ò ¿©ºÎ.
+    //ìŠ¤íƒœë¯¸ë‚˜ ê°ì†Œ ì—¬ë¶€.
     private bool spUsed;
 
-    //¹æ¾î·Â
+    //ë°©ì–´ë ¥
     [SerializeField]
     private int dp;
     private int currentDp;
 
-    //¹è°íÇ°
+    //ë°°ê³ í’ˆ
     [SerializeField]
     private int hungry;
     private int currentHungry;
 
-    //¹è°íÇ°ÀÌ ÁÙ¾îµå´Â ¼Óµµ
+    //ë°°ê³ í’ˆì´ ì¤„ì–´ë“œëŠ” ì†ë„
     [SerializeField]
     private int hungryDecreaseTime;
     private int currentHungryDecreaseTime;
 
-    //¸ñ¸¶¸§
+    //ëª©ë§ˆë¦„
     [SerializeField]
     private int thirsty;
     private int currentThirsty;
 
-    //¸ñ¸¶¸§ÀÌ ÁÙ¾îµå´Â ¼Óµµ
+    //ëª©ë§ˆë¦„ì´ ì¤„ì–´ë“œëŠ” ì†ë„
     [SerializeField]
     private int thirstyDecreaseTime;
     private int currentThirstyDecreaseTime;
 
-    //¸¸Á·µµ
+    //ë§Œì¡±ë„
     [SerializeField]
     private int satisfy;
     private int currentSatisfy;
 
-    //ÇÊ¿äÇÑ ÀÌ¹ÌÁö
+    //í•„ìš”í•œ ì´ë¯¸ì§€
     [SerializeField]
     private Image[] images_Gauge;
 
@@ -127,7 +127,7 @@ public class StatusController : MonoBehaviour
         }
         else
         {
-            Debug.Log("¹è°íÇÄ ¼öÄ¡°¡ 0ÀÌ µÇ¾ú½À´Ï´Ù");
+            Debug.Log("ë°°ê³ í”” ìˆ˜ì¹˜ê°€ 0ì´ ë˜ì—ˆìŠµë‹ˆë‹¤");
         }
     }
 
@@ -149,7 +149,7 @@ public class StatusController : MonoBehaviour
         }
         else
         {
-            Debug.Log("¸ñ¸¶¸§ ¼öÄ¡°¡ 0ÀÌ µÇ¾ú½À´Ï´Ù");
+            Debug.Log("ëª©ë§ˆë¦„ ìˆ˜ì¹˜ê°€ 0ì´ ë˜ì—ˆìŠµë‹ˆë‹¤");
         }
     }
 
@@ -188,7 +188,7 @@ public class StatusController : MonoBehaviour
 
         if(currentHp <= 0)
         {
-            //°ÔÀÓ ¿À¹ö ½ÃÅ°ÀÚ
+            //ê²Œì„ ì˜¤ë²„ ì‹œí‚¤ì
         }
     }
 
@@ -223,7 +223,7 @@ public class StatusController : MonoBehaviour
 
         if (currentDp <= 0)
         {
-            //¹æ¾î·Â 0
+            //ë°©ì–´ë ¥ 0
         }
     }
 

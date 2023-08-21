@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class CloseWeaponController : MonoBehaviour
 {
-    //¹Ì¿Ï¼º Å¬·¡½º
+    //ë¯¸ì™„ì„± í´ë˜ìŠ¤
    
 
-    [SerializeField] //ÇöÀç ÀåÂøµÈ handÇü Å¸ÀÔ ¹«±â
+    [SerializeField] //í˜„ì¬ ì¥ì°©ëœ handí˜• íƒ€ì… ë¬´ê¸°
     protected CloseWeapon currentCloseWeapon;
 
-    //°ø°İÁß
+    //ê³µê²©ì¤‘
     protected bool isAttack = false;
     protected bool isSwing = false;
 
@@ -43,7 +43,7 @@ public abstract class CloseWeaponController : MonoBehaviour
                         return;
                     }
                 }
-                //ÄÚ·çÆ¾
+                //ì½”ë£¨í‹´
                 StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackDelayA, currentCloseWeapon.attackDelayB, currentCloseWeapon.attackDelay));
             }
         }
@@ -58,7 +58,7 @@ public abstract class CloseWeaponController : MonoBehaviour
         currentCloseWeapon.anim.SetTrigger(swingType);
 
         yield return new WaitForSeconds(_delayA);
-        isSwing = true;  //°ø°İ È°¼ºÈ­
+        isSwing = true;  //ê³µê²© í™œì„±í™”
 
         StartCoroutine(HitCoroutine());
 
@@ -70,7 +70,7 @@ public abstract class CloseWeaponController : MonoBehaviour
         isAttack = false;
     }
 
-    //¹Ì¿Ï¼º = Ãß»ó ÄÚ·çÆ¾.
+    //ë¯¸ì™„ì„± = ì¶”ìƒ ì½”ë£¨í‹´.
     protected abstract IEnumerator HitCoroutine();
    
     protected bool CheckObject()
@@ -83,7 +83,7 @@ public abstract class CloseWeaponController : MonoBehaviour
         return false;
     }
 
-    //Ãß°¡ ÆíÁı
+    //ì¶”ê°€ í¸ì§‘
     public virtual void CloseWeaponChange(CloseWeapon _closeWeapon)
     {
         if (WeaponManager.currentWeapon != null)

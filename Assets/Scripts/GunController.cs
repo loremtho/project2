@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    //È°¼ºÈ­¿©ºÎ
+    //í™œì„±í™”ì—¬ë¶€
     public static bool isActivate= false;
 
-    //ÇöÀç ÀåÂøµÈ ÃÑ
+    //í˜„ì¬ ì¥ì°©ëœ ì´
     [SerializeField]
     private Gun currentGun;
 
     private float currentFireRate;
 
-    //»óÅÂº¯¼ö
+    //ìƒíƒœë³€ìˆ˜
     private bool isReload = false;
     [HideInInspector]
     public bool isFIneSightMode = false;
 
-    //º»·¡ Æ÷Áö¼Ç °ª
+    //ë³¸ë˜ í¬ì§€ì…˜ ê°’
     [SerializeField]
     private Vector3 originPos;
     private AudioSource audioSource;
 
-    //·¹ÀÌÀú Ãæµ¿ Á¤º¸ ¹Ş¾Æ¿È
+    //ë ˆì´ì € ì¶©ë™ ì •ë³´ ë°›ì•„ì˜´
     private RaycastHit hitlnfo;
 
     [SerializeField]
@@ -58,7 +58,7 @@ public class GunController : MonoBehaviour
        
     }
 
-    //¿¬»ç¼Óµµ Àç°è»ê
+    //ì—°ì‚¬ì†ë„ ì¬ê³„ì‚°
     private void GunFireRateCalc()
     {
         if (currentFireRate > 0)
@@ -74,7 +74,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    //¹ß»çÀü °è»ê
+    //ë°œì‚¬ì „ ê³„ì‚°
     private void Fire()
     {
         if(!isReload)
@@ -94,17 +94,17 @@ public class GunController : MonoBehaviour
 
     }
 
-    //¹ß»çÈÄ °è»ê
+    //ë°œì‚¬í›„ ê³„ì‚°
     private void Shoot()
     {
         theCrosshair.FireAnimation();
         currentGun.currentBulletCount--;
-        currentFireRate = currentGun.fireRate; //¿¬»ç¼Óµµ Àç°è»ê
+        currentFireRate = currentGun.fireRate; //ì—°ì‚¬ì†ë„ ì¬ê³„ì‚°
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();
 
-        Hit(); //´Ù¸£°Ô ÇÒ°Å¸é ¿ÀºêÁ§Æ® Æú¸µ ¾²±â
-        //ÃÑ±â ¹İµ¿ ÄÚ·çÆ¾
+        Hit(); //ë‹¤ë¥´ê²Œ í• ê±°ë©´ ì˜¤ë¸Œì íŠ¸ í´ë§ ì“°ê¸°
+        //ì´ê¸° ë°˜ë™ ì½”ë£¨í‹´
         StopAllCoroutines();
         StartCoroutine(RetroActionCoroutine());
 
@@ -112,7 +112,7 @@ public class GunController : MonoBehaviour
     }
 
 
-    //¸Â´Â ÆÇÁ¤
+    //ë§ëŠ” íŒì •
     private void Hit()
     {
         if(Physics.Raycast(theCam.transform.position, theCam.transform.forward + 
@@ -143,7 +143,7 @@ public class GunController : MonoBehaviour
             isReload= false;
         }
     }
-    //ÀåÀü ÄÚ·çÆ¾
+    //ì¥ì „ ì½”ë£¨í‹´
     IEnumerator ReloadCoroutine()
     {
         if(currentGun.currentBulletCount >= 0 )
@@ -171,11 +171,11 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            Debug.Log("¼ÒÀ¯ÇÑ ÃÑ¾ËÀÌ ¾ø½À´Ï´Ù.");
+            Debug.Log("ì†Œìœ í•œ ì´ì•Œì´ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
-    //Á¤Á¶ÁØ
+    //ì •ì¡°ì¤€
     private void TryFineSight()
     {
         if(Input.GetButtonDown("Fire2") && !isReload)
@@ -191,7 +191,7 @@ public class GunController : MonoBehaviour
             
     }
 
-    //Á¤Á¶ÁØ ·ÎÁ÷
+    //ì •ì¡°ì¤€ ë¡œì§
     private void FineSight()
     {
         isFIneSightMode = !isFIneSightMode;
@@ -212,7 +212,7 @@ public class GunController : MonoBehaviour
 
     }
 
-    //Á¤Á¶ÁØ È°¼ºÈ­
+    //ì •ì¡°ì¤€ í™œì„±í™”
     IEnumerator FineSughtActivateCoroutine()
     {
         while(currentGun.transform.localPosition != currentGun.fineSightOriginPos)
@@ -222,7 +222,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    //Á¤Á¶ÁØ ºñÈ°¼ºÈ­
+    //ì •ì¡°ì¤€ ë¹„í™œì„±í™”
     IEnumerator FineSughtDeactivateCoroutine()
     {
         while (currentGun.transform.localPosition != originPos)
@@ -232,7 +232,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    //¹İµ¿
+    //ë°˜ë™
     IEnumerator RetroActionCoroutine()
     {
         Vector3 recoilBack = new Vector3(currentGun.retroActionForce, originPos.y, originPos.z);
@@ -242,14 +242,14 @@ public class GunController : MonoBehaviour
         {
             currentGun.transform.localPosition = originPos;
 
-            //¹İµ¿½ÃÀÛ
+            //ë°˜ë™ì‹œì‘
             while(currentGun.transform.localPosition.x <= currentGun.retroActionForce -0.02f)
             {
                 currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, recoilBack, 0.4f);
                 yield return null;
             }
 
-            //¿øÀ§Ä¡
+            //ì›ìœ„ì¹˜
 
             while(currentGun.transform.localPosition != originPos)
             {
@@ -262,14 +262,14 @@ public class GunController : MonoBehaviour
         else
         {
             currentGun.transform.localPosition = currentGun.fineSightOriginPos;
-            //¹İµ¿½ÃÀÛ
+            //ë°˜ë™ì‹œì‘
             while (currentGun.transform.localPosition.x <= currentGun.retroActionFineSightForce - 0.02f)
             {
                 currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, retroActionRecoilBack, 0.4f);
                 yield return null;
             }
 
-            //¿øÀ§Ä¡
+            //ì›ìœ„ì¹˜
 
             while (currentGun.transform.localPosition != currentGun.fineSightOriginPos)
             {
@@ -280,7 +280,7 @@ public class GunController : MonoBehaviour
 
     }
 
-    //»ç¿îµå
+    //ì‚¬ìš´ë“œ
     private void PlaySE(AudioClip _clip)
     {
         audioSource.clip = _clip;
