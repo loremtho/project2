@@ -9,6 +9,8 @@ TagManager:
   - Grass
   - Tree
   - Item
+  - Stucture
+  - Structure
   layers:
   - Default
   - TransparentFX
@@ -21,11 +23,11 @@ TagManager:
   - 
   - Weapon
   - Item
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - NPC
+  - Fire
+  - Terrain
+  - Building
   - 
   - 
   - 
