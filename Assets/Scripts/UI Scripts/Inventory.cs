@@ -55,11 +55,15 @@ public class Inventory : MonoBehaviour
 
     private void OpenInventory()
     {
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
         go_InventoryBase.SetActive(true);
     }
 
     private void CloseInventory()
     {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
         go_InventoryBase.SetActive(false);
     }
 

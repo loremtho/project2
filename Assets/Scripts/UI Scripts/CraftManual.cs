@@ -6,24 +6,24 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Craft
 {
-    public string craftName; //ÀÌ¸§
-    public Sprite craftImage; //ÀÌ¹ÌÁö
-    public string craftDesc; //¼³¸í 
-    public string[] craftNeedItem; //ÇÊ¿äÇÑ ¾ÆÀÌÅÛ
-    public int[] craftNeedItemCount; //ÇÊ¿äÇÑ ¾ÆÀÌÅÛÀÇ °³¼ö.
-    public GameObject go_Prefad; //½ÇÁ¦ ¼³Ä¡µÉ ÇÁ¸®Æé
-    public GameObject go_PreviewPrefad; // ¹Ì¸®º¸±â ÇÁ¸®Æé
+    public string craftName; //ï¿½Ì¸ï¿½
+    public Sprite craftImage; //ï¿½Ì¹ï¿½ï¿½ï¿½
+    public string craftDesc; //ï¿½ï¿½ï¿½ï¿½ 
+    public string[] craftNeedItem; //ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int[] craftNeedItemCount; //ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    public GameObject go_Prefad; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public GameObject go_PreviewPrefad; // ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 public class CraftManual : MonoBehaviour
 {
 
-    //»óÅÂº¯¼ö
+    //ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½
     private bool isActivated = false;
     private bool isPreviewActivated = false;
 
     [SerializeField]
-    private GameObject go_BaseUI; //±âº» º£ÀÌ½º UI
+    private GameObject go_BaseUI; //ï¿½âº» ï¿½ï¿½ï¿½Ì½ï¿½ UI
 
     private int tabNumber = 0;
     private int page = 1;
@@ -31,24 +31,24 @@ public class CraftManual : MonoBehaviour
     private Craft[] craft_SelectedTab;
 
     [SerializeField]
-    private Craft[] craft_fire; //¸ð´ÚºÒ¿ë ÅÇ.
+    private Craft[] craft_fire; //ï¿½ï¿½ÚºÒ¿ï¿½ ï¿½ï¿½.
     [SerializeField]
-    private Craft[] craft_build; //°ÇÃà¿ë ÅÇ
+    private Craft[] craft_build; //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    private GameObject go_Preview; //¹Ì¸®º¸±â ÇÁ¸®ÆéÀ» ´ãÀ» º¯¼ö
-    private GameObject go_Prefad; //½ÇÁ¦ »ý¼ºµÉ ÇÁ¸®ÆÕÀ» ´ãÀ» º¯¼ö
+    private GameObject go_Preview; //ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private GameObject go_Prefab; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
-    private Transform tf_Player; //ÇÃ·¹ÀÌ¾î À§Ä¡
+    private Transform tf_Player; //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡
 
-    //Raycast ÇÊ¿ä º¯¼ö ¼±¾ð
+    //Raycast ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private RaycastHit hitInfo;
     [SerializeField]
     private LayerMask layerMask;
     [SerializeField]
     private float range;
 
-    //ÇÊ¿äÇÑ UI Slot ¿ä¼Ò
+    //ï¿½Ê¿ï¿½ï¿½ï¿½ UI Slot ï¿½ï¿½ï¿½
     [SerializeField]
     private GameObject[] go_Slots;
     [SerializeField]
@@ -60,7 +60,7 @@ public class CraftManual : MonoBehaviour
     [SerializeField]
     private Text[] text_SlotNeedItem;
 
-    //ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    //ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     private Inventory theInventory;
 
     private void Start()
@@ -79,10 +79,10 @@ public class CraftManual : MonoBehaviour
         switch(tabNumber)
         {
             case 0:
-                TabSlotSetting(craft_fire); //ºÒ¼¼ÆÃ
+                TabSlotSetting(craft_fire); //ï¿½Ò¼ï¿½ï¿½ï¿½
                 break;
             case 1:
-                TabSlotSetting(craft_build); //°ÇÃà¼¼ÆÃ
+                TabSlotSetting(craft_build); //ï¿½ï¿½ï¿½à¼¼ï¿½ï¿½
                 break;
        
         }
@@ -135,7 +135,7 @@ public class CraftManual : MonoBehaviour
         ClearSlot();
         craft_SelectedTab = _craft_tab;
 
-        int startSlotNumber = (page - 1) * go_Slots.Length; // 4ÀÇ ¹è¼ö
+        int startSlotNumber = (page - 1) * go_Slots.Length; // 4ï¿½ï¿½ ï¿½ï¿½ï¿½
 
        for(int i =startSlotNumber; i<craft_SelectedTab.Length; i++ )
         {
@@ -169,8 +169,12 @@ public class CraftManual : MonoBehaviour
      
 
         go_Preview = Instantiate(craft_SelectedTab[selectedSlotNumber].go_PreviewPrefad, tf_Player.position + tf_Player.forward, Quaternion.identity);
-        go_Prefad = craft_SelectedTab[selectedSlotNumber].go_Prefad;
+        go_Prefab = craft_SelectedTab[selectedSlotNumber].go_Prefad;
         isPreviewActivated  = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         go_BaseUI.SetActive(false);
     }
     
@@ -230,12 +234,12 @@ public class CraftManual : MonoBehaviour
         if(isPreviewActivated && go_Preview.GetComponent<PreviewObject>().isBuildable())
         {
             UseIngredient();
-            Instantiate(go_Prefad, go_Preview.transform.position,go_Preview.transform.rotation);
+            Instantiate(go_Prefab, go_Preview.transform.position,go_Preview.transform.rotation);
             Destroy(go_Preview);
             isActivated = false;
             isPreviewActivated= false;
             go_Preview= null;
-            go_Prefad= null;
+            go_Prefab= null;
         }
     }
 
@@ -275,7 +279,10 @@ public class CraftManual : MonoBehaviour
         isActivated= false;
         isPreviewActivated= false;
         go_Preview= null;
-        go_Prefad = null;
+        go_Prefab = null;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         go_BaseUI.SetActive(false);
     }
@@ -294,12 +301,16 @@ public class CraftManual : MonoBehaviour
 
     private void OpenWindow()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         isActivated= true;
         go_BaseUI.SetActive(true);
     }
 
     private void CloseWindow()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         isActivated= false;
         go_BaseUI.SetActive(false);
     }
