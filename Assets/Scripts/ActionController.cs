@@ -12,6 +12,7 @@ public class ActionController : MonoBehaviour
 
     private bool lookComputer = false; //컴퓨터를 바라볼 경우 true
 
+    private bool lookActivatedTrap = false; // 가동된 함정을 바로볼시 true
 
     private RaycastHit hitinfo; // 충돌체 정보 저장
 
