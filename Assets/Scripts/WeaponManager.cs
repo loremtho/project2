@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     //무기 중복 교체 실행 방지 공유자원. 클래스 변수 = 정적변수
-    public static bool isChangeWepon = false;
+    public static bool isChangeWeapon = false;
 
     //현재무기와 애니메이션
     public static Transform currentWeapon;
@@ -66,7 +66,7 @@ public class WeaponManager : MonoBehaviour
 
     public IEnumerator ChangeWeaponCoroutine(string _type, string _name)
     {
-        isChangeWepon = true;
+        isChangeWeapon = true;
         currentWeaponAnim.SetTrigger("Weapon_Out");
 
         yield return new WaitForSeconds(changeWeaponDelayTime);
@@ -77,7 +77,7 @@ public class WeaponManager : MonoBehaviour
         yield return new WaitForSeconds(changeWeaponEndDelayTime);
 
         currentWeaponType = _type;
-        isChangeWepon = false;
+        isChangeWeapon = false;
     }
 
     private void CancelPreWeaponAcuion()
@@ -117,6 +117,23 @@ public class WeaponManager : MonoBehaviour
     }
         
 
+
+    public IEnumerator WeaponInCoroutine()
+    {
+        isChangeWeapon = true;
+        currentWeaponAnim.SetTrigger("Weapon_Out");
+
+        yield return new WaitForSeconds(changeWeaponDelayTime);
+
+        currentWeapon.gameObject.SetActive(false);
+    }
+
+    public void WeaponOut()
+    {
+        isChangeWeapon = false;
+
+        currentWeapon.gameObject.SetActive(true);
+    }
 
 
 }

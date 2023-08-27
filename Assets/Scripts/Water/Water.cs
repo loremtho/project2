@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Water : MonoBehaviour
 {
 
   
 
-    [SerializeField] private float waterDrag; //π∞º” ¡ﬂ∑¬
+    [SerializeField] private float waterDrag; //Î¨º ÏÜç Ï§ëÎ†•
     private float originDrag;
 
-    [SerializeField] private Color waterColor; //π∞º” ªˆ±Ú
-    [SerializeField] private float waterFogDensity; //π∞º” ≈π«‘ ¡§µµ
+    [SerializeField] private Color waterColor; //Î¨º ÏÜç ÏÉâÍπî
+    [SerializeField] private float waterFogDensity; //Î¨º ÌÉÅÌï® Ï†ïÎèÑ
 
-    [SerializeField] private Color waterNightColor; //π„ªÛ≈¬ π∞º” ªˆ±Ú
+    [SerializeField] private Color waterNightColor; //Î∞§ ÏÉÅÌÉúÏùò Î¨º ÏÜç ÏÉâÍπî
     [SerializeField] private float waterNightFogDensity;
 
     private Color originColor;
@@ -29,6 +29,17 @@ public class Water : MonoBehaviour
     [SerializeField] private float breatheTime;
     private float currentBreatheTime;
 
+    [SerializeField] private float totalOxygen;
+    private float currentOxygen;
+    private float temp;
+
+    [SerializeField] private GameObject go_BaseUi;
+    [SerializeField] private Text text_totalOxygen;
+    [SerializeField] private Text text_currentOxygen;
+    [SerializeField] private Image image_gauge;
+
+    private StatusController thePlayerStat;
+
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +48,9 @@ public class Water : MonoBehaviour
         originFogDensity = RenderSettings.fogDensity;
 
         originDrag = 0;
+        thePlayerStat = FindObjectOfType<StatusController>();
+        currentOxygen = totalOxygen;
+        text_totalOxygen.text = totalOxygen.ToString();
     }
 
     // Update is called once per frame
@@ -52,6 +66,28 @@ public class Water : MonoBehaviour
 
             }
        
+        }
+
+        DescreseOxygen();
+    }
+
+    private void DescreseOxygen()
+    {
+        if(GameManager.isWater)
+        {
+            currentOxygen -= Time.deltaTime;
+            text_currentOxygen.text = Mathf.RoundToInt(currentOxygen).ToString();
+            image_gauge.fillAmount = currentOxygen / totalOxygen;
+
+            if(currentOxygen <= 0)
+            {
+                temp += Time.deltaTime;
+                if(temp >= 1)
+                {
+                    thePlayerStat.DecreaseHP(1);
+                    temp = 0;
+                }
+            }
         }
     }
 
@@ -74,6 +110,7 @@ public class Water : MonoBehaviour
     {
         SoundManager.instance.PlaySE(sound_WaterIn);
 
+        go_BaseUi.SetActive(true);
         GameManager.isWater = true;
         _player.transform.GetComponent<Rigidbody>().drag = waterDrag;
 
@@ -94,6 +131,8 @@ public class Water : MonoBehaviour
     {
         if (GameManager.isWater)
         {
+            go_BaseUi.SetActive(false);
+            currentOxygen = totalOxygen;
             SoundManager.instance.PlaySE(sound_WaterOut);
 
             GameManager.isWater = false;

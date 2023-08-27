@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,12 @@ public class PlayerController : MonoBehaviour
     private float applySpeed;
     [SerializeField]
     private float crouchSpeed;
-
+    [SerializeField] 
+    private float swimSpeed;
+    [SerializeField]
+    private float swimFastSpeed;
+    [SerializeField]
+    private float upSwimSpeed;
     [SerializeField]
     private float jumpForce;
 
@@ -72,9 +78,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WaterCheck();
         IsGround();
         TryJump();
-        TryRun();
+        if(GameManager.isWater)
+        {
+            TryRun();
+        }
         TryCrrouch();
         Move();
         if(!Inventory.inventoryActivated)
@@ -83,6 +93,18 @@ public class PlayerController : MonoBehaviour
             CharacterRotation();
         }
         MoveCheck();
+    }
+
+    private void WaterCheck()
+    {
+        if(GameManager.isWater)
+        {
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                applySpeed = swimFastSpeed;
+            }
+            applySpeed = swimSpeed;
+        }
     }
     
     private void TryCrrouch() //앉는 시도
@@ -149,10 +171,15 @@ public class PlayerController : MonoBehaviour
     }
     private void TryJump() //점프 시도
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0 )
-        {
+        if(Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0 && !GameManager.isWater)
             Jump();
-        }
+        else if(Input.GetKey(KeyCode.Space) && GameManager.isWater )
+            UpSwim();
+    }
+
+    private void UpSwim()
+    {
+        myRigid.velocity = transform.up * upSwimSpeed;
     }
 
     private void Jump() //점프
