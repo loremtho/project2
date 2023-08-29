@@ -40,7 +40,6 @@ public class DefenseTower : MonoBehaviour
     {
         Spin();
         SearchEnemy();
-      
         LookTarget();
         Attack();
     }
@@ -60,14 +59,12 @@ public class DefenseTower : MonoBehaviour
 
         for (int i = 0; i < _targets.Length; i++)
         {
-            Debug.Log("¼­Ä¡Å¸°Ù");
-
             Transform _targetTf = _targets[i].transform;
 
-            if(_targetTf.name == "Player")
+            if(_targetTf.tag == "Player")
             {
-                Vector3 _direcrion = (_targetTf.position - tf_TopGun.position).normalized;
-                float _angle = Vector3.Angle(_direcrion, tf_TopGun.forward);
+                Vector3 _direction = (_targetTf.position - tf_TopGun.position).normalized;
+                float _angle = Vector3.Angle(_direction, tf_TopGun.forward);
 
                 if(_angle < viewAngle * 0.5f)
                 {
@@ -91,9 +88,8 @@ public class DefenseTower : MonoBehaviour
 
     private void LookTarget()
     {
-        if(isFindTarget)
+        if(isFindTarget == true)
         {
-            Debug.Log("·èÅ¸°Ù");
             Vector3 _direction = (tf_Target.position - tf_TopGun.position).normalized;
             Quaternion _lookRotation = Quaternion.LookRotation(_direction);
             Quaternion _rotation = Quaternion.Lerp(tf_TopGun.rotation, _lookRotation, 0.2f);
@@ -103,7 +99,7 @@ public class DefenseTower : MonoBehaviour
 
     private void Attack()
     {
-        if(isAttack)
+        if(isAttack == true)
         {
             currentRateOfFire += Time.deltaTime;
             if(currentRateOfFire >= rateOfFire)
@@ -114,8 +110,9 @@ public class DefenseTower : MonoBehaviour
                 particle_MuzzleFlash.Play();
 
                 if(Physics.Raycast(tf_TopGun.position,
-                                   tf_TopGun.forward + new Vector3(Random.Range(-1, 1f) * rateOfAccurasy, 0f),
-                                   out hitInfo, range, layerMask)){
+                                   tf_TopGun.forward + new Vector3(Random.Range(-1, 1f) * rateOfAccurasy, Random.Range(-1, 1f) * rateOfAccurasy ,  0f),
+                                   out hitInfo, range, layerMask))
+                {
                     GameObject _temp = Instantiate(go_HitEffect_Prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                     Destroy(_temp, 1f);
 
