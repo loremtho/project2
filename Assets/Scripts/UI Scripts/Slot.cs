@@ -20,7 +20,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     [SerializeField]
     private GameObject go_CountImage;
 
-    private ItemEffectDatabase theItemEffectDarabase;
+    private ItemEffectDatabase theItemEffectDatabase;
 
     [SerializeField]
     private RectTransform baseRect; //인벤토리 영역
@@ -33,7 +33,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     void Start() 
     {
-        theItemEffectDarabase = FindObjectOfType<ItemEffectDatabase>();
+        theItemEffectDatabase = FindObjectOfType<ItemEffectDatabase>();
         theInputNumber = FindObjectOfType<InputNumber>();
     }
 
@@ -42,7 +42,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         Color color = itemImage.color;
         color.a = _alpha;
         itemImage.color = color;
-
     }
 
 
@@ -61,8 +60,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             text_Count.text = "0";
             go_CountImage.SetActive(false);
         }
-       
-
         SetColor(1);
     }
 
@@ -73,14 +70,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void SetSlotCount(int _count) //아이템 갯수 조정
     {
-        itemCount= _count;
+        itemCount += _count;
         text_Count.text = itemCount.ToString();
 
         if(itemCount <= 0)
-        {
             ClearSlot();
-        }
-
     }
 
 
@@ -91,7 +85,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         itemImage.sprite = null;
         SetColor(0);
 
-       
         text_Count.text = "0";
         go_CountImage.SetActive(false);
     }
@@ -103,7 +96,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             if(item != null)
             {
               
-                theItemEffectDarabase.UseItem(item);
+                theItemEffectDatabase.UseItem(item);
 
                 if(item.itemType == Item.ItemType.Used)
                 {
@@ -138,7 +131,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if(!((DragSlot.instance.transform.localPosition.x > baseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < baseRect.rect.xMax 
             && DragSlot.instance.transform.localPosition.y > baseRect.rect.yMin && DragSlot.instance.transform.localPosition.y < baseRect.rect.yMax)
            ||
-           (DragSlot.instance.transform.localPosition.x >quickSlotBaseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < quickSlotBaseRect.rect.xMax 
+           (DragSlot.instance.transform.localPosition.x > quickSlotBaseRect.rect.xMin && DragSlot.instance.transform.localPosition.x < quickSlotBaseRect.rect.xMax 
            && DragSlot.instance.transform.localPosition.y > quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMax && DragSlot.instance.transform.localPosition.y < quickSlotBaseRect.transform.localPosition.y - quickSlotBaseRect.rect.yMin)))
         {
             if(DragSlot.instance.dragSlot != null)
@@ -160,10 +153,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             ChangeSlot();
 
             if(isQuickSlot) // 인벤토리에서 퀵슬롯으로 (혹은 퀵슬롯에서 퀵슬롯으로)
-                theItemEffectDarabase.IsActivatedQuickSlot(quickSlotNumber); // 활성화된 퀵슬롯인지 판단 / 판단 후 교체
+                theItemEffectDatabase.IsActivatedQuickSlot(quickSlotNumber); // 활성화된 퀵슬롯인지 판단 / 판단 후 교체
             else //인벤토리 -> 인벤토리, 퀵슬롯 -> 퀵슬롯
                 if(DragSlot.instance.dragSlot.isQuickSlot) //퀵슬롯 -> 인벤토리
-                    theItemEffectDarabase.IsActivatedQuickSlot(DragSlot.instance.dragSlot.quickSlotNumber); //활성화된 퀵슬롯 ? 교체작업
+                    theItemEffectDatabase.IsActivatedQuickSlot(DragSlot.instance.dragSlot.quickSlotNumber); //활성화된 퀵슬롯 ? 교체작업
         }
            
     }
@@ -190,7 +183,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         if(item != null)
         {
-            theItemEffectDarabase.ShowToolTip(item, transform.position);
+            theItemEffectDatabase.ShowToolTip(item, transform.position);
         }
       
     }
@@ -198,6 +191,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     //슬롯에서 빠저나갈떄 발동
     public void OnPointerExit(PointerEventData eventData)
     {
-        theItemEffectDarabase.HideToolTip();
+        theItemEffectDatabase.HideToolTip();
     }
 }
