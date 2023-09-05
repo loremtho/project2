@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
         MoveCheck();
     }
 
+    void FreezeRotation()
+    {
+        myRigid.angularVelocity = Vector3.zero;
+    }
+
     private void WaterCheck()
     {
         if(GameManager.isWater)
