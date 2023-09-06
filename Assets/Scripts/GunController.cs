@@ -6,6 +6,11 @@ public class GunController : MonoBehaviour
 {
     //활성화여부
     public static bool isActivate= false;
+    
+    //총알 발사 구현
+    public Transform bulletPos; 
+    public GameObject bullet;
+
 
     //현재 장착된 총
     [SerializeField]
@@ -80,7 +85,10 @@ public class GunController : MonoBehaviour
         if(!isReload)
         {
             if (currentGun.currentBulletCount > 0)
-                Shoot();
+            {
+                Shoot(); 
+                Shot();
+            }     
             else
             {
                 CancelFinSight();
@@ -108,6 +116,18 @@ public class GunController : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(RetroActionCoroutine());
 
+
+    }
+
+    IEnumerator Shot()  //골드 메탈 발사
+    {
+        //총알 발사
+        GameObject intantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+        Rigidbody bulletRigid = intantBullet.GetComponent<Rigidbody>();
+        bulletRigid.velocity = bulletPos.forward * 50;
+
+        yield return null;
+        //탄피 할거면 추가 필요
 
     }
 
