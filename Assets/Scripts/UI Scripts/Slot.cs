@@ -77,7 +77,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             ClearSlot();
     }
 
-
     private void ClearSlot() //슬롯 초기화
     {
         item = null;
