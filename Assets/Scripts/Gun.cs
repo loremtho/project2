@@ -13,9 +13,9 @@ public class Gun : MonoBehaviour
 
     public int damage;
 
-    public int reloadBulletCount; //ÀçÀåÀü °³¼ö
+    public int reloadBulletCount; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int currentBulletCount; //ÅºÃ¢
-    public int maxBulletCount; //ÃÖ´ë ¼ÒÀ¯
+    public int maxBulletCount; //ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int carryBulletCount; 
 
     public float retroActionForce;
@@ -26,6 +26,18 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash;
 
     public AudioClip fire_Sound;
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Floor")
+        {
+            Destroy(gameObject, 3);
+        }
+        else if(collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
 
